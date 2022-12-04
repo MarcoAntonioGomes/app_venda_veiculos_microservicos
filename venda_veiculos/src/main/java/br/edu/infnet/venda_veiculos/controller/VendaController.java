@@ -2,17 +2,21 @@ package br.edu.infnet.venda_veiculos.controller;
 
 
 
-import br.edu.infnet.venda_veiculos.domain.model.Venda;
+
+import br.edu.infnet.venda_veiculos.dto.VendaDTO;
+import br.edu.infnet.venda_veiculos.exceptions.CompradorNaoEncontradoException;
+import br.edu.infnet.venda_veiculos.exceptions.VeiculosNaoEncontradosException;
 import br.edu.infnet.venda_veiculos.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
-
-@Controller
+@RestController
+@RequestMapping("/vendas")
 public class VendaController {
 
 
@@ -21,19 +25,9 @@ public class VendaController {
 
 
 
-    @GetMapping(value = "/venda/{id}/excluir")
-    public String exclusao(@PathVariable Integer id){
-
-        vendaService.excluir(id);
-        return "redirect:/venda/lista";
-    }
-
-    @PostMapping(value = "/venda/incluir")
-    public String incluir(Venda venda){
-
-        vendaService.incluir(venda);
-
-        return "redirect:/venda/lista";
+    @PostMapping
+    public ResponseEntity efetuaPedido(@RequestBody VendaDTO vendaDTO) throws VeiculosNaoEncontradosException, CompradorNaoEncontradoException {
+       return ResponseEntity.ok(vendaService.efetuarVenda(vendaDTO));
     }
 
 }
