@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CompradorService {
@@ -35,6 +37,12 @@ public class CompradorService {
     }
 
 
+    public Comprador obterPorId(Integer id) {
+        return compradorRepository.findById(id).orElse(null);
+    }
 
+    public List<Comprador> obterCompradores() {
+        return obterLista().stream().collect(Collectors.toList());
+    }
 
 }
