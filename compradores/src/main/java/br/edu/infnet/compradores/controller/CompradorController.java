@@ -4,6 +4,8 @@ package br.edu.infnet.compradores.controller;
 
 import br.edu.infnet.compradores.model.domain.Comprador;
 import br.edu.infnet.compradores.service.CompradorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,12 +18,15 @@ import java.util.List;
 @RequestMapping("/compradores")
 public class CompradorController {
 
+    private static Logger log = LoggerFactory.getLogger(CompradorController.class);
+
     @Autowired
     private CompradorService compradorService;
 
 
     @GetMapping(value = "/{id}")
     ResponseEntity<Comprador> getCompradorById(@PathVariable Integer id){
+        log.info("Buscando comprador por id: " + id);
         return ResponseEntity.ok(compradorService.obterPorId(id));
     }
 
