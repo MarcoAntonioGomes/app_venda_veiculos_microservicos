@@ -29,12 +29,11 @@ public class CompradorTeste implements ApplicationRunner {
         System.out.println("#comprador");
 
 
-        String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
-        String arq = "compradores.txt";
+        String dir = getClass().getClassLoader().getResource("files/compradores.txt").getFile();
 
         try {
             try {
-                FileReader fileReader = new FileReader(dir + arq);
+                FileReader fileReader = new FileReader(dir);
                 BufferedReader leitura = new BufferedReader(fileReader);
 
                 String linha = leitura.readLine();

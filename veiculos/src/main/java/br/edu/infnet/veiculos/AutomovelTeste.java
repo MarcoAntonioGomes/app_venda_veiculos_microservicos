@@ -32,12 +32,11 @@ public class AutomovelTeste implements ApplicationRunner {
 
 
 
-        String dir = "C:/Users/marco/Desktop/POS-PROJETOS/appvenda/src/main/resources/files/";
-        String arq = "veiculos.txt";
+        String dir = getClass().getClassLoader().getResource("files/veiculos.txt").getFile();
 
         try {
             try {
-                FileReader fileReader = new FileReader(dir + arq);
+                FileReader fileReader = new FileReader(dir);
                 BufferedReader leitura = new BufferedReader(fileReader);
 
                 String linha = leitura.readLine();
