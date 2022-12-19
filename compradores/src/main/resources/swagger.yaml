@@ -1,0 +1,147 @@
+swagger: '2.0'
+info:
+  description: Aplicação Spring Boot REST API
+  version: 1.0.0
+  title: Gestão de Compradores
+  contact:
+    name: Infnet
+    url: https://www.vr.com.br/
+    email: infnet@edu.com.br
+  license:
+    name: Apache License Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+host: localhost:8988
+basePath: /
+tags:
+  - name: comprador-controller
+    description: Comprador Controller
+paths:
+  /compradores:
+    get:
+      tags:
+        - comprador-controller
+      summary: Serviço responsável por listar todos os compradores
+      operationId: getCompradorByIdUsingGET_1
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Compradores recuperado com sucesso!
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Comprador'
+        '404':
+          description: Serviço indisponível!
+  /compradores/comprador:
+    get:
+      tags:
+        - comprador-controller
+      summary: Serviço responsável por redirecionar para tela de cadastro do comprador
+      operationId: telaCadastroUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: Redirectcom sucesso!
+          schema:
+            type: string
+        '404':
+          description: Serviço indisponível!
+  /compradores/comprador/incluir:
+    post:
+      tags:
+        - comprador-controller
+      summary: Serviço responsável por cadastrar o comprador
+      operationId: incluirUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: cpf
+          in: query
+          required: false
+          type: string
+        - name: email
+          in: query
+          required: false
+          type: string
+        - name: id
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: nome
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '201':
+          description: Cadastro com sucesso
+          schema:
+            type: string
+        '404':
+          description: Serviço indisponível!
+  /compradores/comprador/{id}/excluir:
+    get:
+      tags:
+        - comprador-controller
+      summary: Serviço responsável por excluir comprador pelo identificador
+      operationId: excluirUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Comprador excluído com sucesso!
+          schema:
+            type: string
+        '404':
+          description: Serviço indisponível!
+  /compradores/{id}:
+    get:
+      tags:
+        - comprador-controller
+      summary: Serviço responsável por recuperar comprador pelo identificador
+      operationId: getCompradorByIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Comprador recuperado com sucesso!
+          schema:
+            $ref: '#/definitions/Comprador'
+        '404':
+          description: Serviço indisponível!
+definitions:
+  Comprador:
+    type: object
+    properties:
+      cpf:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+        format: int32
+      nome:
+        type: string
+    title: Comprador

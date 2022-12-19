@@ -1,0 +1,98 @@
+swagger: '2.0'
+info:
+  description: Aplicação Spring Boot REST API
+  version: 1.0.0
+  title: Gestão de Vendas de Veículos
+  contact:
+    name: Infnet
+    url: https://www.vr.com.br/
+    email: infnet@edu.com.br
+  license:
+    name: Apache License Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+host: localhost:8987
+basePath: /
+tags:
+  - name: venda-controller
+    description: Venda Controller
+paths:
+  /vendas:
+    post:
+      tags:
+        - venda-controller
+      summary: Serviço responsável por efetuar o pedido de compra de veículo
+      operationId: efetuaPedidoUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: vendaDTO
+          description: vendaDTO
+          required: true
+          schema:
+            $ref: '#/definitions/VendaDTO'
+      responses:
+        '200':
+          description: Pedido efetuado com sucesso!
+          schema:
+            $ref: '#/definitions/Venda'
+        '404':
+          description: Serviço indisponível!
+  /vendas/compradores:
+    get:
+      tags:
+        - venda-controller
+      summary: Serviço responsável por listar todos os compradores
+      operationId: getCompradoresUsingGET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Compradores recuperado com sucesso!
+          schema:
+            type: array
+            items:
+              type: object
+        '404':
+          description: Serviço indisponível!
+definitions:
+  Venda:
+    type: object
+    properties:
+      avista:
+        type: boolean
+      data:
+        type: string
+        format: date-time
+      descricao:
+        type: string
+      id:
+        type: integer
+        format: int32
+      idComprador:
+        type: integer
+        format: int32
+      veiculosIds:
+        type: array
+        items:
+          type: integer
+          format: int32
+    title: Venda
+  VendaDTO:
+    type: object
+    properties:
+      avista:
+        type: boolean
+      descricao:
+        type: string
+      idComprador:
+        type: integer
+        format: int32
+      idsVeiculos:
+        type: array
+        items:
+          type: integer
+          format: int32
+    title: VendaDTO

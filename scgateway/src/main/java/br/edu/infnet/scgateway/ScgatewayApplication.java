@@ -19,14 +19,14 @@ public class ScgatewayApplication {
 		return builder.routes()
 				.route(p -> p
 						.path("/vendas/**")
-						.filters(f ->f.circuitBreaker(config -> config
-								.setName("mycmd")
-								.setFallbackUri("forward:/fallback"))
-								)
 						.uri("http://localhost:8987")
 							)
 				.route(p -> p
 					.path("/compradores/**")
+					.filters(f ->f.circuitBreaker(config -> config
+							.setName("mycmd")
+							.setFallbackUri("forward:/fallback"))
+							)
 					.uri("http://localhost:8988")
 						)
 				
