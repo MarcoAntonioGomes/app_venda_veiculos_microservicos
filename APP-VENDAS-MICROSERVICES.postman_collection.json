@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "06449c6c-1fdf-454c-a5f9-add26c44195e",
+		"name": "APP-VENDAS-MICROSERVICES",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5958361"
+	},
+	"item": [
+		{
+			"name": "EUREKA-SERVER-APPS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8761/eureka/apps",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8761",
+					"path": [
+						"eureka",
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONFI-SERVER-APPS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/comprador/my",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"comprador",
+						"my"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REALIZAR-VENDA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Venda 1\",\r\n  \"avista\": false,\r\n  \"idComprador\": 1,\r\n  \"idsVeiculos\": [\r\n    1,2,3\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8987/vendas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8987",
+					"path": [
+						"vendas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR-COMPRADORES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8987/vendas/compradores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8987",
+					"path": [
+						"vendas",
+						"compradores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GATEWAY COMPRADORES",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Venda 1\",\r\n  \"avista\": false,\r\n  \"idComprador\": 1,\r\n  \"idsVeiculos\": [\r\n    1,2,3\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/compradores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"compradores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GATEWAY VENDAS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Venda 1\",\r\n  \"avista\": false,\r\n  \"idComprador\": 1,\r\n  \"idsVeiculos\": [\r\n    1,2,3\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vendas/compradores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vendas",
+						"compradores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GATEWAY VENDAS COMPRADORES",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descricao\": \"Venda 1\",\r\n  \"avista\": false,\r\n  \"idComprador\": 1,\r\n  \"idsVeiculos\": [\r\n    1,2,3\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vendas/compradores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vendas",
+						"compradores"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
